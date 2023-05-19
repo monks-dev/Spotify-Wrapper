@@ -51,34 +51,65 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.2/dist/semantic.min.js"></script>
 </head>
 <body>
-<div style="min-height: 100vh" class="ui attached inverted segment">
-    <form method="POST" class="ui inverted <?= $error ? 'error' : '' ?> form">
-        <div class="field">
-            <label>Playlist ID</label>
-            <input type="text" name="id" placeholder="Playlist ID">
-        </div>
-        <button class="ui button" type="submit">Submit</button>
-        <div class="ui error message">
-            <div class="header">Playlist <?= $playlistId ?> does not exist!</div>
-        </div>
-    </form>
 
+
+
+<div style="min-height: 100vh" class="ui attached inverted segment">
+    <div class="ui menu inverted">
+        <span class="item">Spotify Wrapper</span>
+        <div class="right menu">
+            <div class="item">
+                <div class="ui form">
+                    <form method="POST">
+                        <input type="text" placeholder="Playlist ID..." name="id">
+                    </form>
+
+                </div>
+            </div>
+            <div class="item">
+                <div class="ui primary button">Login</div>
+            </div>
+        </div>
+
+    </div>
     <?php if (isset($playlist)) { ?>
-        <div class="ui divider"></div>
-        <img class="ui tiny rounded image" src="<?= $playlist->images[0]->url ?>">
-        <span class="ui large text"><?= $playlist->tracks->total ?> Tracks</span>
-        <div class="ui inverted very relaxed list">
-            <?php foreach ($tracks as $track) { ?>
-                <div class="item">
-                    <img class="ui avatar image" src="<?= $track->album->images[0]->url ?>">
+        <div class="ui two column grid">
+            <div class="left attached column">
+                <div class="ui inverted horizontal card">
+                    <div class="image">
+                        <img class="ui small circular image" src="<?= $playlist->images[0]->url ?>">
+                    </div>
                     <div class="content">
-                        <div class="header"><?= $track->name ?></div>
-                        <div class="description"><?= implode(", ", array_map(static fn($artist) => $artist->name, (array)$track->artists)) ?></div>
+                        <div class="header"><?= $playlist->name ?></div>
+                        <div class="meta">
+                            <span class="item"><?= $playlist->owner->display_name ?></span>
+                            <span class="item"><?= $playlist->tracks->total ?> Tracks</span>
+                        </div>
+                        <div class="description">
+                            <p><?= $playlist->description ?></p>
+                        </div>
                     </div>
                 </div>
-            <?php } ?>
+            </div>
+            <div class="right attached column">
+                <div class="ui big inverted relaxed animated selection divided list">
+                    <?php foreach ($tracks as $track) { ?>
+                        <div class="item">
+                            <img class="ui avatar image" src="<?= $track->album->images[0]->url ?>">
+                            <div class="content">
+                                <div class="header"><?= $track->name ?></div>
+                                <div class="description"><?= implode(", ", array_map(static fn($artist) => $artist->name, (array)$track->artists)) ?></div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+
+            </div>
         </div>
+
+
     <?php } ?>
+
 </div>
 
 </body>
