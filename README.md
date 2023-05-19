@@ -1,6 +1,8 @@
 # Spotify
 A very simple and not fully implemented Spotify API wrapper
 
+![Spotify Wrapper Example](SpotifyAPI.png)
+
 # Usage
 
 ## Creating Client
