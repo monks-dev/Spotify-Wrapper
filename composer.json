@@ -1,0 +1,22 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Monks\\Spotify\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "monks-dev",
+            "email": "aidan.young.dev@gmail.com"
+        },
+        {
+            "name": "Robert Snedeker",
+            "email": "rsnedeker20@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.6",
+        "ext-json": "*",
+        "commandstring/utils": "^1.7"
+    }
+}
